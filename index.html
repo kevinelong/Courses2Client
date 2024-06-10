@@ -1,0 +1,39 @@
+
+
+<body>
+    <div id="list">?</div>
+</body>
+
+<script>
+
+    function getCourse(item){
+        return `
+            <tr>
+                <td>${item.courseName}</td>
+                <td>
+                    <a href="read.html?id=${item.id}">Read/View GET</a><br>
+                    <a href="update.html?id=${item.id}">Update/Modify PUT</a><br>
+                    <a href="delete.html?id=${item.id}">Delete/Remove DELETE</a><br><br>
+                </td>
+            </tr>
+        `;
+    }
+
+    function renderList(data){
+        list.innerHTML = `
+            <a href="create.html">
+                Create/New/Insert POST
+            </a><hr>
+            
+            <table>
+                ${ data.map(getCourse).join("") } 
+            </table>
+        `;
+    }
+
+    const baseURL = "http://localhost:8081/api";
+    const coursesURI = "/courses/";
+
+    fetch(baseURL + coursesURI).then(r=>r.json()).then(renderList);
+
+</script>
