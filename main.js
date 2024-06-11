@@ -2,9 +2,9 @@ function getCourseId() {
     const params = new URLSearchParams(window.location.search);
     const id = parseInt(params.get("id"));
     return id;
-} 
+}
 
-function renderCourse(course, targetId){
+function renderCourse(course, targetId) {
     // window.courseId.innerText = JSON.stringify(course, undefined, 4)
     const target = document.getElementById(targetId);
     target.innerHTML = `
@@ -18,11 +18,51 @@ function renderCourse(course, targetId){
     `;
 }
 
-function readCourse(targetId){
+function readCourse(targetId) {
     // window.courseId.innerText = getCourseId();
 
     const baseURL = "http://localhost:8081/api";
     const coursesURI = "/courses/" + getCourseId();
 
-    fetch(baseURL + coursesURI).then(r=>r.json()).then( c => renderCourse(c, targetId) );
+    fetch(baseURL + coursesURI).then(r => r.json()).then(c => renderCourse(c, targetId));
 }
+
+function renderCourseForm(course, targetId) {
+    // window.courseId.innerText = JSON.stringify(course, undefined, 4)
+    const target = document.getElementById(targetId);
+    target.innerHTML = `
+    <label>Course Name:<input id="courseName" value="${course.courseName}" type="text"></label>
+    <label>Department:<input id="dept" value="${course.dept}" type="text"></label>
+    <label>Course Number:<input id="courseNum" value="${course.courseNum}" type="number"></label>
+    <label>Instructor:<input id="instructor" value="${course.instructor}" type="text"></label>
+    <label>Start Date:<input id="startDate" value="${course.startDate}" type="date"></label>
+    <label>Number Days:<input id="numDays" value="${course.numDays}" type="number"></label>
+    `;
+}
+function courseFromForm() {
+    return {
+        courseName: courseName.value,
+        dept: dept.value,
+        courseNum: courseNum.value,
+        instructor: instructor.value,
+        startDate: startDate.value,
+        numDays: numDays.value,
+    }
+}
+function editCourse(targetId) {
+    const baseURL = "http://localhost:8081/api";
+    const coursesURI = "/courses/" + getCourseId();
+    fetch(baseURL + coursesURI).then(r => r.json()).then(c => renderCourseForm(c, targetId));
+}
+
+function newCourse(targetId) {
+    renderCourseForm({
+        courseName: "",
+        dept: "",
+        courseNum: "",
+        instructor: "",
+        startDate: "",
+        numDays: "",
+    }, targetId);
+}
+

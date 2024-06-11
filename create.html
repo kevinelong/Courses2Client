@@ -1,9 +1,34 @@
 <head>
     <script src="./main.js"></script>
+    <link rel="stylesheet" href="./style.css">
 </head>
-<body>
+<body >
     <h1>Create POST</h1>
+    <div id="target">?</div>
+    <button id="saveButton"> Save New Course </button>
 </body>
 <script>
-    
+    newCourse("target");
+
+    saveButton.addEventListener("click", e=>{
+        const data = courseFromForm();
+
+        const baseURL = "http://localhost:8081/api";
+        const coursesURI = "/courses/";
+
+        fetch(
+            baseURL + coursesURI, 
+            { 
+                method: "POST",
+                body:  JSON.stringify(data),
+                headers: {
+                    "Content-Type" : "application/json"
+                }
+            }
+        ).then(
+            r => window.location = "index.html"
+        );
+
+    });
+
 </script>

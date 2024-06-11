@@ -1,10 +1,33 @@
 <head>
     <script src="./main.js"></script>
+    <link rel="stylesheet" href="./style.css">
 </head>
 <body>
     <h1>Update PUT</h1>
-    <div id="courseId">?</div>
+    <div id="target">?</div>
+    <button id="updateButton"> Update Course </button>
 </body>
 <script>
-    window.courseId.innerText = getCourseId();
+    editCourse("target");
+
+    updateButton.addEventListener("click", e=>{
+        const data = courseFromForm();
+
+        const baseURL = "http://localhost:8081/api";
+        const coursesURI = "/courses/" + getCourseId();
+
+        fetch(
+            baseURL + coursesURI, 
+            { 
+                method: "PUT",
+                body:  JSON.stringify(data),
+                headers: {
+                    "Content-Type" : "application/json"
+                }
+            }
+        ).then(
+            r => window.location = "index.html"
+        );
+
+    });
 </script>

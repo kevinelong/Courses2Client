@@ -1,0 +1,14 @@
+body{
+    background-color: khaki;
+    color: darkred;
+    font-family: Cambria, Cochin, Georgia, Times, 'Times New Roman', serif;
+}
+
+label{
+    display: block;
+    margin-bottom: 0.5rem;
+}
+
+label input{
+    display: block;
+}
