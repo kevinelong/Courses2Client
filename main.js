@@ -27,6 +27,19 @@ function readCourse(targetId) {
     fetch(baseURL + coursesURI).then(r => r.json()).then(c => renderCourse(c, targetId));
 }
 
+function deleteCourse() {
+    const baseURL = "http://localhost:8081/api";
+    const coursesURI = "/courses/" + getCourseId();
+    fetch(
+        baseURL + coursesURI, 
+        { 
+            method: "DELETE" 
+        }
+    ).then(
+        r => window.location = "index.html"
+    );
+}
+
 function renderCourseForm(course, targetId) {
     // window.courseId.innerText = JSON.stringify(course, undefined, 4)
     const target = document.getElementById(targetId);

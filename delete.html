@@ -11,21 +11,7 @@
 <script>
 
     readCourse("target");
-    
-    function deleteCourse() {
-        const baseURL = "http://localhost:8081/api";
-        const coursesURI = "/courses/" + getCourseId();
 
-        fetch(
-            baseURL + coursesURI, 
-            { 
-                method: "DELETE" 
-            }
-        ).then(
-            r => window.location = "index.html"
-        );
-
-    }
 
     confirmDelete.addEventListener("click", deleteCourse)
 </script>
