@@ -66,3 +66,20 @@ function newCourse(targetId) {
     }, targetId);
 }
 
+function createOrUpdateCourse(isCreate){
+    const data = courseFromForm();
+    const baseURL = "http://localhost:8081/api";
+    const coursesURI = isCreate ? "/courses/" : "/courses/" + getCourseId();
+    fetch(
+        baseURL + coursesURI, 
+        { 
+            method: isCreate ? "POST" : "PUT",
+            body:  JSON.stringify(data),
+            headers: {
+                "Content-Type" : "application/json"
+            }
+        }
+    ).then(
+        r => window.location = "index.html"
+    );
+}

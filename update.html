@@ -9,25 +9,5 @@
 </body>
 <script>
     editCourse("target");
-
-    updateButton.addEventListener("click", e=>{
-        const data = courseFromForm();
-
-        const baseURL = "http://localhost:8081/api";
-        const coursesURI = "/courses/" + getCourseId();
-
-        fetch(
-            baseURL + coursesURI, 
-            { 
-                method: "PUT",
-                body:  JSON.stringify(data),
-                headers: {
-                    "Content-Type" : "application/json"
-                }
-            }
-        ).then(
-            r => window.location = "index.html"
-        );
-
-    });
+    updateButton.addEventListener("click", ()=> createOrUpdateCourse(false));
 </script>
